@@ -20,7 +20,7 @@ func main() {
 func PartOne(input []int) int {
 	output := 0
 	for i, depth := range input {
-		if i!=0 && depth > input[i-1] {
+		if i != 0 && depth > input[i-1] {
 			output++
 		}
 	}
@@ -48,4 +48,3 @@ func sum(input []int) int {
 	}
 	return output
 }
-
