@@ -2,16 +2,12 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"path"
-	"runtime"
-	"strconv"
-	"strings"
+	"github.com/c-fandango/advent_of_code/2021/utils"
 )
 
 func main() {
 
-	input := readData("../data/data_day_1.txt")
+	input := utils.ReadDataInt("../data/data_day_1.txt")
 
 	part_one := PartOne(input)
 	part_two := PartTwo(input)
@@ -53,23 +49,3 @@ func sum(input []int) int {
 	return output
 }
 
-func readData(path string) []int {
-
-	file_bytes, _ := ioutil.ReadFile(toAbsPath(path))
-	input := string(file_bytes)
-
-	input_strings := strings.Split(input, "\n")
-
-	input_ints := make([]int, len(input_strings))
-
-	for i, str := range input_strings {
-		input_ints[i], _ = strconv.Atoi(str)
-	}
-
-	return input_ints
-}
-
-func toAbsPath(rel_path string) string {
-	_, filename, _, _ := runtime.Caller(0)
-	return path.Join(path.Dir(filename), rel_path)
-}

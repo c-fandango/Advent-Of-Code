@@ -1,13 +1,14 @@
 package utils
 
 import (
-	"ioutil"
+	"io/ioutil"
 	"strings"
 	"runtime"
+	"strconv"
 	"path"
 )
 
-func ReadDataStr(path string) []int {
+func ReadDataStr(path string) []string {
 
         file_bytes, _ := ioutil.ReadFile(toAbsPath(path))
         input := string(file_bytes)
