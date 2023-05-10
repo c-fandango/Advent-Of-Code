@@ -2,37 +2,44 @@ package utils
 
 import (
 	"io/ioutil"
-	"strings"
+	"path"
 	"runtime"
 	"strconv"
-	"path"
+	"strings"
 )
 
 func ReadDataStr(path string) []string {
 
-        file_bytes, _ := ioutil.ReadFile(toAbsPath(path))
-        input := string(file_bytes)
+	file_bytes, _ := ioutil.ReadFile(toAbsPath(path))
+	input := string(file_bytes)
+	var output []string
 
-        input_strings := strings.Split(input, "\n")
+	input_strings := strings.Split(input, "\n")
 
-        return input_strings
+	for _, word := range input_strings {
+		if len(word) > 0 {
+			output = append(output, word)
+
+		}
+	}
+
+	return output
 }
 
 func ReadDataInt(path string) []int {
 
 	input_strings := ReadDataStr(path)
 
-        input_ints := make([]int, len(input_strings))
+	input_ints := make([]int, len(input_strings))
 
-        for i, str := range input_strings {
-                input_ints[i], _ = strconv.Atoi(str)
-        }
+	for i, str := range input_strings {
+		input_ints[i], _ = strconv.Atoi(str)
+	}
 
-        return input_ints
+	return input_ints
 }
 
 func toAbsPath(rel_path string) string {
-        _, filename, _, _ := runtime.Caller(1)
-        return path.Join(path.Dir(filename), rel_path)
+	_, filename, _, _ := runtime.Caller(1)
+	return path.Join(path.Dir(filename), rel_path)
 }
-
