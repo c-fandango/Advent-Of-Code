@@ -1,3 +1,4 @@
+// Package utils for advent of code solutions
 package utils
 
 import (
@@ -8,15 +9,16 @@ import (
 	"strings"
 )
 
+// ReadDataStr converts text file into array of strings
 func ReadDataStr(path string) []string {
 
-	file_bytes, _ := ioutil.ReadFile(toAbsPath(path))
-	input := string(file_bytes)
+	fileBytes, _ := ioutil.ReadFile(toAbsPath(path))
+	input := string(fileBytes)
 	var output []string
 
-	input_strings := strings.Split(input, "\n")
+	inputStrings := strings.Split(input, "\n")
 
-	for _, word := range input_strings {
+	for _, word := range inputStrings {
 		if len(word) > 0 {
 			output = append(output, word)
 
@@ -26,20 +28,21 @@ func ReadDataStr(path string) []string {
 	return output
 }
 
+// ReadDataInt converts text file into array of integers
 func ReadDataInt(path string) []int {
 
-	input_strings := ReadDataStr(path)
+	inputStrings := ReadDataStr(path)
 
-	input_ints := make([]int, len(input_strings))
+	inputInts := make([]int, len(inputStrings))
 
-	for i, str := range input_strings {
-		input_ints[i], _ = strconv.Atoi(str)
+	for i, str := range inputStrings {
+		inputInts[i], _ = strconv.Atoi(str)
 	}
 
-	return input_ints
+	return inputInts
 }
 
-func toAbsPath(rel_path string) string {
+func toAbsPath(relPath string) string {
 	_, filename, _, _ := runtime.Caller(1)
-	return path.Join(path.Dir(filename), rel_path)
+	return path.Join(path.Dir(filename), relPath)
 }
