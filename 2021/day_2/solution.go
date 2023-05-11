@@ -1,25 +1,27 @@
+// day two solution
 package main
 
 import (
 	"fmt"
-	"github.com/c-fandango/advent_of_code/2021/utils"
 	"strconv"
 	"strings"
+
+	"github.com/c-fandango/advent_of_code/2021/utils"
 )
 
 func main() {
 
 	input := utils.ReadDataStr("../data/data_day_2.txt")
 
-	part_one := PartOne(input)
-	part_two := PartTwo(input)
+	answerOne := partOne(input)
+	answerTwo := partTwo(input)
 
-	fmt.Println(part_one)
-	fmt.Println(part_two)
+	fmt.Println(answerOne)
+	fmt.Println(answerTwo)
 
 }
 
-func PartOne(input []string) int {
+func partOne(input []string) int {
 	xpos := 0
 	ypos := 0
 
@@ -42,7 +44,7 @@ func PartOne(input []string) int {
 	return xpos * ypos
 }
 
-func PartTwo(input []string) int {
+func partTwo(input []string) int {
 	xpos := 0
 	ypos := 0
 	aim := 0

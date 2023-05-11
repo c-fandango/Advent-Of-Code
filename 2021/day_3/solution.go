@@ -1,28 +1,30 @@
+// day three
 package main
 
 import (
 	"fmt"
-	"github.com/c-fandango/advent_of_code/2021/utils"
 	"math"
 	"strconv"
+
+	"github.com/c-fandango/advent_of_code/2021/utils"
 )
 
 func main() {
 
 	input := utils.ReadDataStr("../data/data_day_3.txt")
 
-	part_one := PartOne(input)
-	part_two := PartTwo(input)
+	answerOne := partOne(input)
+	answerTwo := partTwo(input)
 
-	fmt.Println(part_one)
-	fmt.Println(part_two)
+	fmt.Println(answerOne)
+	fmt.Println(answerTwo)
 
 }
 
 func modeBits(input []string) (string, string) {
 	length := len(input[0])
 	common := ""
-	least_common := ""
+	leastCommon := ""
 	counts := make([]int, length)
 
 	for i := 0; i < length; i++ {
@@ -39,47 +41,46 @@ func modeBits(input []string) (string, string) {
 	for _, count := range counts {
 		if 2*count >= len(input) {
 			common += "1"
-			least_common += "0"
+			leastCommon += "0"
 		} else {
 			common += "0"
-			least_common += "1"
+			leastCommon += "1"
 		}
 	}
-	return common, least_common
+	return common, leastCommon
 }
 
-func PartOne(input []string) int64 {
+func partOne(input []string) int64 {
 
 	length := len(input[0])
 	gamma, _ := modeBits(input)
 
-	gamma_val, _ := strconv.ParseInt(gamma, 2, 64)
-	epsilon_val := int64(math.Pow(2, float64(length))) - gamma_val - 1
+	gammaVal, _ := strconv.ParseInt(gamma, 2, 64)
+	epsilonVal := int64(math.Pow(2, float64(length))) - gammaVal - 1
 
-	return gamma_val * epsilon_val
+	return gammaVal * epsilonVal
 }
 
-func PartTwo(input []string) int64 {
+func partTwo(input []string) int64 {
 	//not very nice - maybe make nicer later
-	var new_remaining []string
+	var newRemaining []string
 
 	length := len(input[0])
-
 	remaining := input
 
 	//oxygen
 	for i := 0; i < length; i++ {
-		new_remaining = []string{}
+		newRemaining = []string{}
 		if len(remaining) == 1 {
 			break
 		}
 		common, _ := modeBits(remaining)
 		for _, code := range remaining {
 			if code[i] == common[i] {
-				new_remaining = append(new_remaining, code)
+				newRemaining = append(newRemaining, code)
 			}
 		}
-		remaining = new_remaining
+		remaining = newRemaining
 	}
 
 	oxygen := remaining[0]
@@ -87,22 +88,22 @@ func PartTwo(input []string) int64 {
 	//carbon
 	remaining = input
 	for i := 0; i < length; i++ {
-		new_remaining = []string{}
+		newRemaining = []string{}
 		if len(remaining) == 1 {
 			break
 		}
-		_, least_common := modeBits(remaining)
+		_, leastCommon := modeBits(remaining)
 		for _, code := range remaining {
-			if code[i] == least_common[i] {
-				new_remaining = append(new_remaining, code)
+			if code[i] == leastCommon[i] {
+				newRemaining = append(newRemaining, code)
 			}
 		}
-		remaining = new_remaining
+		remaining = newRemaining
 	}
 
 	carbon := remaining[0]
-	oxygen_val, _ := strconv.ParseInt(oxygen, 2, 64)
-	carbon_val, _ := strconv.ParseInt(carbon, 2, 64)
+	oxygenVal, _ := strconv.ParseInt(oxygen, 2, 64)
+	carbonVal, _ := strconv.ParseInt(carbon, 2, 64)
 
-	return oxygen_val * carbon_val
+	return oxygenVal * carbonVal
 }
