@@ -9,6 +9,21 @@ import (
 	"strings"
 )
 
+// Sign gives sign of integer or zero
+func Sign(input int) int {
+	if input > 0 {
+		return 1
+	} else if input < 0 {
+		return -1
+	}
+	return 0
+}
+
+// SwapInt for swapping two integers
+func SwapInt(x int, y int) (int, int) {
+	return y, x
+}
+
 // ReadDataStr converts text file into array of strings
 func ReadDataStr(path string) []string {
 
