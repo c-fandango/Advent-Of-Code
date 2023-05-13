@@ -11,8 +11,8 @@ func main() {
 
 	input := utils.ReadDataInt("../data/data_day_1.txt")
 
-	answerOne := PartOne(input)
-	answerTwo := PartTwo(input)
+	answerOne := partOne(input)
+	answerTwo := partTwo(input)
 
 	fmt.Println(answerOne)
 	fmt.Println(answerTwo)
