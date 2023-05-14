@@ -3,8 +3,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
 
 	"github.com/c-fandango/advent_of_code/2021/utils"
 )
@@ -19,16 +17,6 @@ func main() {
 	fmt.Println(answerOne)
 	fmt.Println(answerTwo)
 
-}
-
-func extractData(input string) []int {
-	fishStr := strings.Split(input, ",")
-	fishes := make([]int, len(fishStr))
-
-	for i, fish := range fishStr {
-		fishes[i], _ = strconv.Atoi(fish)
-	}
-	return fishes
 }
 
 func initMap(fishes []int, count int) map[int]int {
@@ -50,7 +38,7 @@ func initMap(fishes []int, count int) map[int]int {
 func partOne(input []string, days int) int {
 	const childhood, cycleLength = 8, 6
 
-	fishes := extractData(input[0])
+	fishes := utils.CSVToInts(input[0])
 	ages := initMap(fishes, childhood)
 
 	for days > 0 {

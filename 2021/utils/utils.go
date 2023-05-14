@@ -1,4 +1,4 @@
-// Package utils for advent of code solutions
+// Package utils for advent of code solutions.
 package utils
 
 import (
@@ -9,7 +9,18 @@ import (
 	"strings"
 )
 
-// Sign gives sign of integer or zero
+// CSVToInts converts a comma separated string of numbers to slice of ints.
+func CSVToInts(input string) []int {
+	inputSplt := strings.Split(input, ",")
+	output := make([]int, len(inputSplt))
+
+	for i, elem := range inputSplt {
+		output[i], _ = strconv.Atoi(elem)
+	}
+	return output
+}
+
+// Sign gives sign of integer or zero.
 func Sign(input int) int {
 	if input > 0 {
 		return 1
@@ -19,12 +30,12 @@ func Sign(input int) int {
 	return 0
 }
 
-// SwapInt for swapping two integers
+// SwapInt for swapping two integers.
 func SwapInt(x int, y int) (int, int) {
 	return y, x
 }
 
-// ReadDataStr converts text file into array of strings
+// ReadDataStr converts text file into array of strings.
 func ReadDataStr(path string) []string {
 
 	fileBytes, _ := ioutil.ReadFile(toAbsPath(path))
@@ -43,7 +54,7 @@ func ReadDataStr(path string) []string {
 	return output
 }
 
-// ReadDataInt converts text file into array of integers
+// ReadDataInt converts text file into array of integers.
 func ReadDataInt(path string) []int {
 
 	inputStrings := ReadDataStr(path)
