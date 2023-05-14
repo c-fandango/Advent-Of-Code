@@ -9,6 +9,20 @@ import (
 	"strings"
 )
 
+// MinMax function to return the minimum and maximumof a slice of ints.
+func MinMax(input []int) (int, int) {
+	min := input[0]
+	max := input[0]
+	for _, num := range input {
+		if num < min {
+			min = num
+		} else if num > max {
+			max = num
+		}
+	}
+	return min, max
+}
+
 // CSVToInts converts a comma separated string of numbers to slice of ints.
 func CSVToInts(input string) []int {
 	inputSplt := strings.Split(input, ",")
