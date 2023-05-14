@@ -9,6 +9,28 @@ import (
 	"strings"
 )
 
+// IntInSlice returns true if an integer is in a slice of integers.
+func IntInSlice(inputInt int, inputSlice []int) bool {
+	for _, num := range inputSlice {
+		if num == inputInt {
+			return true
+		}
+
+	}
+	return false
+}
+
+// StringInSlice returns true if an string is in a slice of strings.
+func StringInSlice(inputString string, inputSlice []string) bool {
+	for _, num := range inputSlice {
+		if num == inputString {
+			return true
+		}
+
+	}
+	return false
+}
+
 // MinMax function to return the minimum and maximumof a slice of ints.
 func MinMax(input []int) (int, int) {
 	min := input[0]
@@ -46,6 +68,11 @@ func Sign(input int) int {
 
 // SwapInt for swapping two integers.
 func SwapInt(x int, y int) (int, int) {
+	return y, x
+}
+
+// SwapInt for swapping two strings.
+func SwapStr(x string, y string) (string, string) {
 	return y, x
 }
 
