@@ -22,6 +22,36 @@ func main() {
 
 }
 
+func partOne(input []string) int {
+	vents := extractData(input)
+
+	lowPoints := findLowPoints(vents)
+	lowPointSum := 0
+	for _, value := range lowPoints {
+		lowPointSum += value + 1
+	}
+
+	return lowPointSum
+
+}
+
+func partTwo(input []string) int {
+	vents := extractData(input)
+	counts := []int{0, 0, 0}
+
+	lowPoints := findLowPoints(vents)
+	for point, _ := range lowPoints {
+		basin := make(map[[2]int]int)
+		basin = expandBasin(point, basin, vents)
+		if len(basin) > counts[0] {
+			counts[0] = len(basin)
+			sort.Ints(counts)
+		}
+	}
+
+	return counts[0] * counts[1] * counts[2]
+}
+
 func extractData(input []string) map[[2]int]int {
 	output := make(map[[2]int]int)
 	for i, row := range input {
@@ -55,19 +85,6 @@ func findLowPoints(vents map[[2]int]int) map[[2]int]int {
 	return lowPoints
 }
 
-func partOne(input []string) int {
-	vents := extractData(input)
-
-	lowPoints := findLowPoints(vents)
-	lowPointSum := 0
-	for _, value := range lowPoints {
-		lowPointSum += value + 1
-	}
-
-	return lowPointSum
-
-}
-
 func expandBasin(point [2]int, basin map[[2]int]int, vents map[[2]int]int) map[[2]int]int {
 	height := vents[point]
 	if height == 9 {
@@ -95,21 +112,4 @@ func expandBasin(point [2]int, basin map[[2]int]int, vents map[[2]int]int) map[[
 	delete(vents, point)
 
 	return basin
-}
-
-func partTwo(input []string) int {
-	vents := extractData(input)
-	counts := []int{0, 0, 0}
-
-	lowPoints := findLowPoints(vents)
-	for point, _ := range lowPoints {
-		basin := make(map[[2]int]int)
-		basin = expandBasin(point, basin, vents)
-		if len(basin) > counts[0] {
-			counts[0] = len(basin)
-			sort.Ints(counts)
-		}
-	}
-
-	return counts[0] * counts[1] * counts[2]
 }
